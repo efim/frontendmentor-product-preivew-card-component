@@ -25,4 +25,9 @@ lazy val productPreviewCardComponent = project.in(file("."))
      * It provides static types for the browser DOM APIs.
      */
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
+    // https://laminar.dev/documentation
+    libraryDependencies += "com.raquo" %%% "laminar" % "15.0.1",
+    // check out extras in laminext : fetch \ ws \ sources & signals
+    // https://laminext.dev/v/0.15.x/
+    libraryDependencies += "io.laminext" %%% "fetch" % "0.15.0",
   )
