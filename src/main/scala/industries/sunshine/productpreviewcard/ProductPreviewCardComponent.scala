@@ -6,8 +6,8 @@ import scala.scalajs.js.annotation.*
 import org.scalajs.dom
 
 // import javascriptLogo from "/javascript.svg"
-@js.native @JSImport("/javascript.svg", JSImport.Default)
-val javascriptLogo: String = js.native
+// @js.native @JSImport("/javascript.svg", JSImport.Default)
+// val javascriptLogo: String = js.native
 
 @main
 def LiveChart(): Unit =
@@ -15,9 +15,6 @@ def LiveChart(): Unit =
     <div>
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-        <img src="$javascriptLogo" class="logo vanilla" alt="JavaScript logo" />
       </a>
       <h1>Hello Scala.js!</h1>
       <div class="card">
