@@ -17,6 +17,7 @@ def ProductPreviewCardComponent(): Unit =
 object Main {
   def appElement(): Element =
     div(
+      className := "bg-green-200 h-screen w-screen",
       a(href := "https://vitejs.dev", target := "_blank",
         img(src := "/vite.svg", className := "logo", alt := "Vite logo"),
       ),
