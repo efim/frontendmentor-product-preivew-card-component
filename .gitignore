@@ -27,3 +27,7 @@ dist-ssr
 /target/
 /project/project/
 /project/target/
+/.bloop/
+/.metals/
+/project/.bloop/
+/project/metals.sbt
