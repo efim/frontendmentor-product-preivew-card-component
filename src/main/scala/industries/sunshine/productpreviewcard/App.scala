@@ -49,33 +49,33 @@ object Main {
         img(
           src := product.desktopImg,
           role := "img",
-          className := "rounded-l-lg h-[405px]"
+          className := "rounded-l-xl h-[450px]"
         )
     }
 
     div(
       className := "flex flex-col bg-white rounded-lg lg:flex-row w-[350px] h-[600px]",
-      className := "lg:w-[540px] lg:h-[405px]",
+      className := "lg:rounded-xl lg:w-[600px] lg:h-[450px]",
       child <-- dynamicImage,
       div(
-        className := "flex flex-col p-7 lg:p-8",
+        className := "flex flex-col p-7 lg:p-9",
         p( // CATEGORY NAME
           product.category,
           className := "text-sm text-gray-500 uppercase tracking-[.3rem]"
         ),
         p( // TITLE
           product.title,
-          className := "py-3 font-serif text-4xl font-bold lg:py-4 lg:leading-none lg:text-[2rem]"
+          className := "py-3 font-serif text-4xl font-bold lg:py-5 lg:leading-none"
         ),
         p( // DESCRIPTION
           product.description,
-          className := "text-base text-gray-500 lg:pt-4 lg:text-sm lg:leading-relaxed"
+          className := "text-base text-gray-500 lg:pt-2 lg:leading-relaxed"
         ),
         div( // PRICES
-          className := "grid grid-cols-2 items-center pt-6 pb-5 lg:grid-cols-5 lg:pb-8",
+          className := "grid grid-cols-2 items-center pt-7 pb-5 lg:grid-cols-5 lg:pb-8",
           p(
             product.price,
-            className := "font-serif text-4xl lg:col-span-3 text-dark-cyan lg:text-[2rem]"
+            className := "font-serif text-4xl lg:col-span-3 text-dark-cyan"
           ),
           product.oldPrice match {
             case Some(crossedPrice) =>
@@ -90,7 +90,7 @@ object Main {
             className := "px-4 pl-0 h-4 lg:pr-3"
           ),
           "Add to Cart",
-          className := "w-full rounded-lg h-[3.25rem] bg-dark-cyan lg:h-[3rem]",
+          className := "w-full rounded-lg h-[3.25rem] bg-dark-cyan",
           className := "text-sm font-bold text-white",
           className := "flex flex-row justify-center items-center",
           className := "duration-300 active:scale-105 hover:bg-darkest-cyan"
