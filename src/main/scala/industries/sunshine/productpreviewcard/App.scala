@@ -15,38 +15,62 @@ def App(): Unit =
   )
 
 object Main {
+
   def appElement(): Element =
     div(
       className := "flex flex-col justify-center items-center w-screen h-screen bg-cream",
       renderProductPreviewCard(hardcodedProduct),
-      renderAttribution()
+      // renderAttribution()
     )
 
   def renderProductPreviewCard(product: ProductDescription) = {
+
+    val windowResizeEvents = new EventBus[Unit]
+    dom.window.addEventListener(
+      "resize",
+      _ => windowResizeEvents.writer.onNext(())
+    )
+    val windowWidthStream: Signal[Int] = windowResizeEvents.events
+      .map(_ => dom.window.innerWidth.toInt)
+      .startWith(dom.window.innerWidth.toInt)
+    val isMobileStream: Signal[Boolean] = windowWidthStream.map(_ <= 1024)
+
+    val dynamicImage = isMobileStream.map {
+      case true =>
+        img(
+          src := product.mobileImg,
+          role := "img",
+          className := "rounded-t-lg"
+        )
+      case false =>
+        img(
+          src := product.desktopImg,
+          role := "img",
+          className := "rounded-l-lg h-[405px]"
+        )
+    }
+
     div(
-      className := "bg-white rounded-lg w-[350px] h-[600px]",
-      img(
-        src := product.mobileImg,
-        role := "img",
-        className := "rounded-t-lg"
-      ),
+      className := "flex flex-col bg-white rounded-lg lg:flex-row w-[350px] h-[600px]",
+      className := "lg:w-[540px] lg:h-[405px]",
+      child <-- dynamicImage,
       div(
-        className := "flex flex-col p-7",
-        p(
+        className := "flex flex-col p-7 lg:p-8",
+        p( // CATEGORY NAME
           product.category,
           className := "text-sm text-gray-500 uppercase tracking-[.3rem]"
         ),
-        p(
+        p( // TITLE
           product.title,
-          className := "py-3 font-serif text-4xl font-bold"
+          className := "py-3 font-serif text-4xl font-bold lg:py-4 lg:leading-none lg:text-[2rem]"
         ),
-        p(
+        p( // DESCRIPTION
           product.description,
-          className := "text-base text-gray-500"
+          className := "text-base text-gray-500 lg:pt-4 lg:text-sm lg:leading-relaxed"
         ),
-        div(
-          className := "grid grid-cols-2 items-center pt-6 pb-5",
-          p(product.price, className := "font-serif text-4xl text-dark-cyan"),
+        div( // PRICES
+          className := "grid grid-cols-2 items-center pt-6 pb-5 lg:grid-cols-5 lg:pb-8",
+          p(product.price, className := "font-serif text-4xl lg:col-span-3 text-dark-cyan lg:text-[2rem]"),
           product.oldPrice match {
             case Some(crossedPrice) =>
               p(crossedPrice, className := "text-sm text-gray-500 line-through")
@@ -57,10 +81,10 @@ object Main {
           img(
             src := "/images/icon-cart.svg",
             role := "img",
-            className := "px-3"
+            className := "px-4 pl-0 h-4 lg:pr-3"
           ),
           "Add to Cart",
-          className := "w-full rounded-xl h-[3.25rem] bg-dark-cyan",
+          className := "w-full rounded-lg h-[3.25rem] bg-dark-cyan lg:h-[3rem]",
           className := "text-sm font-bold text-white",
           className := "flex flex-row justify-center items-center",
           className := "duration-300 active:scale-105 hover:bg-darkest-cyan"
@@ -98,7 +122,7 @@ object Main {
     "Perfume",
     "Gabrielle Essence Eau De Parfum",
     "A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the House of CHANEL.",
-    "$169.99",
-    Some("$199.99")
+    "$149.99",
+    Some("$169.99")
   )
 }
