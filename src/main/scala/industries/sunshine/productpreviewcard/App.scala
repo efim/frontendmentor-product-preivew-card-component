@@ -18,9 +18,12 @@ object Main {
 
   def appElement(): Element =
     div(
-      className := "flex flex-col justify-center items-center w-screen h-screen bg-cream",
-      renderProductPreviewCard(hardcodedProduct),
-      // renderAttribution()
+      className := "flex flex-col w-screen h-screen bg-cream",
+      div(
+        className := "flex flex-grow justify-center items-center",
+        renderProductPreviewCard(hardcodedProduct)
+      ),
+      renderAttribution()
     )
 
   def renderProductPreviewCard(product: ProductDescription) = {
@@ -70,7 +73,10 @@ object Main {
         ),
         div( // PRICES
           className := "grid grid-cols-2 items-center pt-6 pb-5 lg:grid-cols-5 lg:pb-8",
-          p(product.price, className := "font-serif text-4xl lg:col-span-3 text-dark-cyan lg:text-[2rem]"),
+          p(
+            product.price,
+            className := "font-serif text-4xl lg:col-span-3 text-dark-cyan lg:text-[2rem]"
+          ),
           product.oldPrice match {
             case Some(crossedPrice) =>
               p(crossedPrice, className := "text-sm text-gray-500 line-through")
@@ -95,7 +101,7 @@ object Main {
 
   def renderAttribution() = {
     div(
-      className := "attribution",
+      className := "h-4 attribution",
       "Challenge by ",
       a(
         href := "https://www.frontendmentor.io?ref=challenge",
