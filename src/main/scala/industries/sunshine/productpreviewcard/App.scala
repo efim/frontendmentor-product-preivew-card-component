@@ -18,10 +18,13 @@ object Main {
 
   def appElement(): Element =
     div(
-      className := "flex relative flex-col w-screen h-screen bg-cream",
-      div(
-        className := "flex flex-grow justify-center items-center",
-        renderProductPreviewCard(hardcodedProduct)
+      mainTag(
+        className := "flex relative flex-col w-screen h-screen bg-cream",
+        role := "main",
+        div(
+          className := "flex flex-grow justify-center items-center",
+          renderProductPreviewCard(hardcodedProduct)
+        ),
       ),
       renderAttribution()
     )
@@ -43,12 +46,14 @@ object Main {
         img(
           src := product.mobileImg,
           role := "img",
+          alt := product.photoAltTest,
           className := "rounded-t-lg"
         )
       case false =>
         img(
           src := product.desktopImg,
           role := "img",
+          alt := product.photoAltTest,
           className := "rounded-l-xl h-[450px]"
         )
     }
@@ -59,11 +64,11 @@ object Main {
       child <-- dynamicImage,
       div(
         className := "flex flex-col p-7 lg:p-9",
-        p( // CATEGORY NAME
+        h1( // CATEGORY NAME
           product.category,
           className := "text-sm text-gray-500 uppercase tracking-[.3rem]"
         ),
-        p( // TITLE
+        h2( // TITLE
           product.title,
           className := "py-3 font-serif text-4xl font-bold lg:py-5 lg:leading-none"
         ),
@@ -87,6 +92,7 @@ object Main {
           img(
             src := "/images/icon-cart.svg",
             role := "img",
+            alt := "",
             className := "px-4 pl-0 h-4 lg:pr-3"
           ),
           "Add to Cart",
@@ -100,7 +106,8 @@ object Main {
   }
 
   def renderAttribution(): Element = {
-    div(
+    footerTag(
+      role := "contentinfo",
       className := "absolute inset-x-0 bottom-2 attribution",
       "Challenge by ",
       a(
@@ -120,7 +127,8 @@ object Main {
       title: String,
       description: String,
       price: String,
-      oldPrice: Option[String]
+      oldPrice: Option[String],
+      photoAltTest: String
   )
   val hardcodedProduct = ProductDescription(
     "/images/image-product-mobile.jpg",
@@ -129,6 +137,7 @@ object Main {
     "Gabrielle Essence Eau De Parfum",
     "A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the House of CHANEL.",
     "$149.99",
-    Some("$169.99")
+    Some("$169.99"),
+    "CHANEL perfume in a rectangular glass bottle."
   )
 }
