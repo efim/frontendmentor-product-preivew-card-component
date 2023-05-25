@@ -91,7 +91,7 @@ object Main {
         button(
           img(
             src := "/images/icon-cart.svg",
-            role := "img",
+            aria.hidden := true,
             alt := "",
             className := "px-4 pl-0 h-4 lg:pr-3"
           ),
