@@ -18,7 +18,7 @@ object Main {
 
   def appElement(): Element =
     div(
-      className := "flex flex-col w-screen h-screen bg-cream",
+      className := "flex relative flex-col w-screen h-screen bg-cream",
       div(
         className := "flex flex-grow justify-center items-center",
         renderProductPreviewCard(hardcodedProduct)
@@ -99,9 +99,9 @@ object Main {
     )
   }
 
-  def renderAttribution() = {
+  def renderAttribution(): Element = {
     div(
-      className := "h-4 attribution",
+      className := "absolute inset-x-0 bottom-2 attribution",
       "Challenge by ",
       a(
         href := "https://www.frontendmentor.io?ref=challenge",
